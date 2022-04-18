@@ -64,14 +64,38 @@ function buildQuiz(){
 }
 
 
+// Results function
+function showResults(){
+    // gather answer containers from our quiz
+    const answerContainers = quizContainer.querySelectorAll('.answers');
 
-function showResults(){}
-//myQuestions.forEach( (currentQuestion, questionNumber) => {
-    // code for each question
-//});
+    let numCorrect = 0;
+
+    myQuestions.forEach( (currentQuestion, questionNumber) => {
+        const answerContainer = answerContainers[questionNumber];
+        const selector = `input[name=question${questionNumber}]:checked`;
+        const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+        // if answer is correct
+        if(userAnswer === currentQuestion.correctAnswer){
+            numCorrect++;
+
+            answerContainers[questionNumber].style.color = 'lightgreen'
+        
+        }
+        // if answer is incorrect
+        else {
+            answerContainers[questionNumber].style.color = 'red'
+        }
+    });
+    // show number of correct answers
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+}
+
+
+    
 // display quiz instantly
 buildQuiz();
-
 
 // upon submit, show results (eventlistener)
 submitButton.addEventListener('click', showResults);
