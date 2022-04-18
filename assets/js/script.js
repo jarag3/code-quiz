@@ -28,6 +28,7 @@ const myQuestions = [
             b: "h1",
             c: "head"
         },
+        correctAnswer: "b"
     }
 ];
 
